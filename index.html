@@ -1,0 +1,193 @@
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+        <title>Seatwork 2</title>
+        <style>
+
+        body {
+            background-color: black; 
+            padding: 10px;
+        }
+
+        body, .input-boxes, button {
+            color: white;
+        }
+
+        .input-boxes input {
+            background-color: black;
+            color: white;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: auto;
+            border: 5px solid grey; 
+            padding: 10px;
+            text-align: center; 
+        }
+
+        .input-boxes input {
+            width: calc(50% - 20px);
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin-bottom: 5px;
+            color: white;
+            border: none;
+        }
+        
+        #buttons-container {
+            display: grid;
+            grid-template-columns: repeat(2, auto);
+            grid-gap: 5px;
+            justify-content: center; 
+        }
+
+        .modal-content {
+        background-color: black;
+        color: white;
+        padding: 20px;
+        border-radius: 10px;
+    }
+
+
+    .close {
+        color: white;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+        color: #999;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+
+    .ok-button {
+        padding: 10px 20px;
+        background-color: #f9d552;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+        #btnProduct { background-color: #f9d552; }
+        #btnPower { background-color: #f9d552; }
+        #btnRemainder { background-color: #f9d552; }
+        #btnEqual { background-color: #f9d552; }
+
+    </style>
+    </head>
+    <body>
+
+    <div class="container">
+        <p>Input whatever you want and have fun!</p>
+        <div class="input-boxes">
+            Given:<br/>
+            Enter a value for x: <input type="number" id="num1"><br/>
+            Enter a value for y: <input type="number" id="num2"><br/>
+            Click the buttons below to proceed.
+        </div>
+
+        <div id="buttons-container">
+            <button id='btnProduct'>Product of x and y</button>
+            <button id='btnPower'>x raised to y</button>
+            <button id='btnRemainder'>Get the remainder</button>
+            <button id='btnEqual'>Check if x is equal to y</button>
+        </div>
+
+        <!-- Modal -->
+        <div id="myModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <p id="modal-text"></p>
+            </div>
+        </div>
+
+        <p id="product"></p>
+        <p id="power"></p>
+        <p id="remainder"></p>
+        <p id="isEqual"></p>
+    </div>
+
+    <script>
+        document.getElementById('btnProduct').onclick = function() {
+           let num1 = document.getElementById('num1').value; 
+           let num2 = document.getElementById('num2').value;
+        
+           let product = num1 * num2;
+           showModal("The product of x and y is: " + product);
+        }
+
+        document.getElementById('btnPower').onclick = function() {
+           let num1 = document.getElementById('num1').value; 
+           let num2 = document.getElementById('num2').value;
+        
+           let power = Math.pow(num1, num2);
+           showModal("x raised to y is: " + power);
+        }
+
+        document.getElementById('btnRemainder').onclick = function() {
+           let num1 = document.getElementById('num1').value; 
+           let num2 = document.getElementById('num2').value;
+        
+           let remainder = num1 % num2;
+           showModal("The remainder of x divided by y is: " + remainder);
+        }
+
+        document.getElementById('btnEqual').onclick = function() {
+           let num1 = document.getElementById('num1').value; 
+           let num2 = document.getElementById('num2').value;
+        
+           let isEqual = (num1 == num2);
+           showModal("Check if x is equal to y: " + isEqual);
+        }
+
+        // Modal
+        var modal = document.getElementById("myModal");
+        var modalText = document.getElementById("modal-text");
+
+        function showModal(text) {
+            modal.style.display = "block";
+            modalText.textContent = text;
+        }
+
+        // Close the modal
+        var closeBtn = document.getElementsByClassName("close")[0];
+        closeBtn.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        // Close the modal when clicking outside of it
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+
+        function showModal(text) {
+        modal.style.display = "block";
+        modalText.textContent = text;
+        modalText.innerHTML += "<br><br><button class='ok-button'>OK</button>"; 
+    }
+
+
+    document.addEventListener("click", function(event) {
+        if (event.target.classList.contains("ok-button")) {
+            modal.style.display = "none";
+        }
+    });
+    </script>
+
+    </body>
+    </html>
